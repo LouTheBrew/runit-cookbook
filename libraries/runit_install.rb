@@ -7,6 +7,7 @@ module RunitInstall
     include Poise
     provides  :runit_install
     actions   :install
+    attribute :essentials_cookbook, default: 'build-essential'
     attribute :name, name_attribute: true, kind_of: String
     attribute :runit_repository, required: true, default: 'https://github.com/LouTheBrew/runit.git'
     attribute :runit_src_directory, required: true, default: '/opt/runit/src/'
@@ -36,6 +37,7 @@ module RunitInstall
       yield
     end
     def action_install
+      include_recipe new_resource.essentials_cookbook
       if new_resource.install_deps
         deps
       end
