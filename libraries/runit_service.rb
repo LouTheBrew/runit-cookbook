@@ -13,7 +13,6 @@ module RunitService
     attribute :services_directory, default: '/etc/sv/'
     attribute :activated_directory, default: '/service/'
     attribute :command, default: '/tmp/dummy.sh'
-    attribute :log_path, default: '/tmp/'
     attribute :user, default: 'root'
     attribute :group, default: 'root'
     attribute :shell, default: '/bin/sh'
@@ -22,6 +21,9 @@ module RunitService
   class Provider < Chef::Provider
     include Poise
     provides :runit_service
+    def log_path
+      "/etc/sv/#{new_resource.name}/log/"
+    end
     def common
       [new_resource.services_directory, new_resource.activated_directory].each do |dir|
         directory dir do
@@ -69,7 +71,7 @@ module RunitService
         variables :context => {
           :user => new_resource.user,
           :shell => new_resource.shell,
-          :logs => new_resource.log_path
+          :logs => self.log_path
         }
         sensitive true
         mode new_resource.mode
