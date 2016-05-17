@@ -8,6 +8,8 @@ module RunitInstall
     provides  :runit_install
     actions   :install
     attribute :essentials_cookbook, default: 'build-essential'
+    attribute :inactive_directory, default: '/etc/sv'
+    attribute :init_service_name, default: 'runit'
     attribute :name, name_attribute: true, kind_of: String
     attribute :runit_repository, required: true, default: 'https://github.com/LouTheBrew/runit.git'
     attribute :runit_src_directory, required: true, default: '/opt/runit/src/'
@@ -15,10 +17,6 @@ module RunitInstall
     attribute :bin_dir, default: '/bin'
     attribute :install_deps, default: true
     attribute :deps, default: %w{glibc-static git}
-    attribute :env, default: {:vars => [
-      {:key => 'SVDIR', :value => '/service/'},
-      {:key => 'SVWAIT', :value => '7'}
-    ]}
     attribute :implement_init_service, default: true
     attribute :implement_systemd_service, default: false
     attribute :runsvdir_start_path, default: '/bin/runsvdir-start'
@@ -35,14 +33,17 @@ module RunitInstall
       end
     end
     def common
+      directory new_resource.inactive_directory do
+        recursive true
+      end
       directory new_resource.runit_src_directory do
         recursive true
       end
       yield
     end
     def action_install
-      include_recipe new_resource.essentials_cookbook
       if new_resource.install_deps
+        include_recipe new_resource.essentials_cookbook
         deps
       end
       common do
@@ -69,7 +70,7 @@ runsvdir -P #{new_resource.name} 'log: .........................................
           mode new_resource.mode
         end
         if new_resource.implement_init_service
-          init_service 'runit' do
+          init_service new_resource.init_service_name do
             command new_resource.runsvdir_start_path
             user new_resource.user
             group new_resource.group

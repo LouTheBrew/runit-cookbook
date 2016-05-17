@@ -1,8 +1,7 @@
-template '/tmp/dummy.sh' do
-  source 'dummy_service.erb'
-  mode 0777
+directory node[:poise_runit][:service][:directory] do
+  recursive true
 end
-runit_install '/service/'
-runit_service 'dummy' do
-  command '/tmp/dummy.sh'
+runit_install node[:poise_runit][:service][:directory]
+runit_service 'craziness' do
+  command 'sleep 20'
 end

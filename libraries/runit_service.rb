@@ -22,7 +22,7 @@ module RunitService
     include Poise
     provides :runit_service
     def log_path
-      "/etc/sv/#{new_resource.name}/log/"
+      "#{new_resource.services_directory}#{new_resource.name}/log/"
     end
     def common
       [new_resource.services_directory, new_resource.activated_directory].each do |dir|
