@@ -15,12 +15,14 @@ module RunitInstall
     attribute :bin_dir, default: '/bin'
     attribute :install_deps, default: true
     attribute :deps, default: %w{glibc-static git}
+    attribute :services_directory: default: '/service/'
     attribute :env, default: {:vars => [
       {:key => 'SVDIR', :value => '/service/'},
       {:key => 'SVWAIT', :value => '7'}
     ]}
     attribute :implement_init_service, default: true
-    attribute :implement_systemd_service, default: true
+    attribute :implement_systemd_service, default: false
+    attribute :runsvdir_start_path, default: '/bin/runsvdir-start'
   end
   class Provider < Chef::Provider
     include Poise
@@ -53,8 +55,20 @@ module RunitInstall
           EOH
           not_if do ::File.exist?('command/') end
         end
+        file new_resource.runsvdir_start_path do
+          content <<-EOH
+#!/bin/sh
+PATH=/usr/local/bin:/usr/local/sbin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/X11R6/bin
+exec env - PATH=$PATH \
+runsvdir -P #{new_resource.services_directory}'log: ...........................................................................................................................................................................................................................................................................................................................................................................................................'
+          EOH
+          user new_resource.user
+          group new_resource.group
+        end
         if new_resource.implement_init_service
-          nil
+          init_service 'runit' do
+            command new_resource.runsvdir_start_path
+          end
         end
         if new_resource.implement_systemd_service
           nil
