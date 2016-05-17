@@ -26,9 +26,21 @@ runit_service
 - create a runit service
 - create action automatically tries to activate the service
 - services are activated by links from the inactive directory to the active directory
-- this is the most basic example
+- this is the most basic example, this service will start at boot, be kept up, logged to log/current and reside in /service (active) and /etc/sv (inactive)
 ```
 runit_service 'useless_sleep' do
   command 'sleep 10'
+end
+```
+- You can disable a service like this
+```
+runit_service 'useless_sleep' do
+  action :deactivate
+end
+```
+- You may enable it once more without running any additional installation steps with
+```
+runit_service 'useless_sleep' do
+  action :deactivate
 end
 ```
