@@ -25,6 +25,7 @@ module RunitInstall
     attribute :runsvdir_start_path, default: '/bin/runsvdir-start'
     attribute :user, default: 'root'
     attribute :group, default: 'root'
+    attribute :mode, default: 0777
   end
   class Provider < Chef::Provider
     include Poise
@@ -66,6 +67,7 @@ runsvdir -P #{new_resource.services_directory}'log: ............................
           EOH
           user new_resource.user
           group new_resource.group
+          mode new_resource.mode
         end
         if new_resource.implement_init_service
           init_service 'runit' do
