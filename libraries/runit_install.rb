@@ -15,7 +15,6 @@ module RunitInstall
     attribute :bin_dir, default: '/bin'
     attribute :install_deps, default: true
     attribute :deps, default: %w{glibc-static git}
-    attribute :services_directory, default: '/service/'
     attribute :env, default: {:vars => [
       {:key => 'SVDIR', :value => '/service/'},
       {:key => 'SVWAIT', :value => '7'}
@@ -63,7 +62,7 @@ module RunitInstall
 #!/bin/sh
 PATH=/usr/local/bin:/usr/local/sbin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/X11R6/bin
 exec env - PATH=$PATH \
-runsvdir -P #{new_resource.services_directory}'log: ...........................................................................................................................................................................................................................................................................................................................................................................................................'
+runsvdir -P #{new_resource.name} 'log: ...........................................................................................................................................................................................................................................................................................................................................................................................................'
           EOH
           user new_resource.user
           group new_resource.group
