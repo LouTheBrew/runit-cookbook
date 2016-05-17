@@ -63,6 +63,7 @@ module RunitService
         }
         sensitive true
         mode new_resource.mode
+        cookbook new_resource.local_cookbook
       end
       template "#{new_resource.services_directory}#{new_resource.name}/log/run" do
         source new_resource.log_template
@@ -75,6 +76,7 @@ module RunitService
         }
         sensitive true
         mode new_resource.mode
+        cookbook new_resource.local_cookbook
       end
       self.action_activate
     end

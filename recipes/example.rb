@@ -16,6 +16,7 @@ runit_install '/my/service/' do
 end
 template '/tmp/dummy.sh' do
   source 'dummy_service.erb'
+  cookbook 'poise-runit'
   mode 0777
 end
 runit_service 'dummy' do
