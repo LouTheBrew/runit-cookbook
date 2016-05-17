@@ -16,6 +16,7 @@ service 'runit' do
   action :start
 end
 ```
+- This is the most basic example
 ```
 runit_install node[:poise_runit][:service][:directory]
 ```
@@ -25,3 +26,9 @@ runit_service
 - create a runit service
 - create action automatically tries to activate the service
 - services are activated by links from the inactive directory to the active directory
+- this is the most basic example
+```
+runit_service 'useless_sleep' do
+  command 'sleep 10'
+end
+```
