@@ -1,1 +1,1 @@
-knife cookbook site share poise-runit "Other" -o ~/.work/github.com/LouTheBrew/
+knife cookbook site share poise-runit "Other" -o ~/.work/LouTheBrew/cookbooks/
