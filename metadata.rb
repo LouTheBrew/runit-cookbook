@@ -4,7 +4,7 @@ maintainer_email 'LouTheBrew@gmail.com'
 license 'MIT'
 description 'Installs/Configures runit'
 long_description 'Installs/Configures runit'
-version '0.0.15'
+version '0.0.16'
 
 depends 'build-essential'
 depends 'poise'

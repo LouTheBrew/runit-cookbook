@@ -35,13 +35,13 @@ module RunitService
     def action_activate
       common
       link ::File.join(new_resource.activated_directory, new_resource.name) do
-        to ::File.join(new_resource.services_directory}, new_resource.name)
+        to ::File.join(new_resource.services_directory, new_resource.name)
       end
     end
     def action_deactivate
       common
       link ::File.join(new_resource.activated_directory, new_resource.name) do
-        to ::File.join(new_resource.services_directory}, new_resource.name)
+        to ::File.join(new_resource.services_directory, new_resource.name)
         action :delete
       end
     end
