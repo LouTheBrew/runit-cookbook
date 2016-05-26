@@ -7,6 +7,8 @@ module RunitInstall
     include Poise
     provides  :runit_install
     actions   :install
+    attribute :user, default: 'root'
+    attribute :group, default: 'root'
     attribute :essentials_cookbook, default: 'build-essential'
     attribute :inactive_directory, default: '/etc/sv'
     attribute :init_service_name, default: 'runit'
@@ -20,8 +22,6 @@ module RunitInstall
     attribute :implement_init_service, default: true
     attribute :implement_systemd_service, default: false
     attribute :runsvdir_start_path, default: '/bin/runsvdir-start'
-    attribute :user, default: 'root'
-    attribute :group, default: 'root'
     attribute :mode, default: 0777
   end
   class Provider < Chef::Provider
@@ -35,9 +35,13 @@ module RunitInstall
     def common
       directory new_resource.inactive_directory do
         recursive true
+        user new_resource.user
+        group new_resource.group
       end
       directory new_resource.runit_src_directory do
         recursive true
+        user new_resource.user
+        group new_resource.group
       end
       yield
     end
