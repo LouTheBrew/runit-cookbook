@@ -23,7 +23,7 @@ module RunitService
     include Poise
     provides :runit_service
     def log_path
-      "#{new_resource.services_directory}#{new_resource.name}/log/"
+      ::File.join(new_resource.services_directory, new_resource.name, 'log')
     end
     def common
       [new_resource.services_directory, new_resource.activated_directory].each do |dir|
@@ -34,26 +34,26 @@ module RunitService
     end
     def action_activate
       common
-      link "#{new_resource.activated_directory}#{new_resource.name}" do
-        to "#{new_resource.services_directory}#{new_resource.name}"
+      link ::File.join(new_resource.activated_directory, new_resource.name) do
+        to ::File.join(new_resource.services_directory}, new_resource.name)
       end
     end
     def action_deactivate
       common
-      link "#{new_resource.activated_directory}#{new_resource.name}" do
-        to "#{new_resource.services_directory}#{new_resource.name}"
+      link ::File.join(new_resource.activated_directory, new_resource.name) do
+        to ::File.join(new_resource.services_directory}, new_resource.name)
         action :delete
       end
     end
     def action_install
       common
-      directory "#{new_resource.services_directory}#{new_resource.name}" do
+      directory ::File.join(new_resource.services_directory, new_resource.name) do
         recursive true
       end
-      directory "#{new_resource.services_directory}#{new_resource.name}/log" do
+      directory ::File.join(new_resource.services_directory, new_resource.name, 'log') do
         recursive true
       end
-      template "#{new_resource.services_directory}#{new_resource.name}/run" do
+      template ::File.join(new_resource.services_directory, new_resource.name, 'run') do
         source new_resource.service_template
         user new_resource.user
         group new_resource.group
@@ -66,7 +66,7 @@ module RunitService
         mode new_resource.mode
         cookbook new_resource.local_cookbook
       end
-      template "#{new_resource.services_directory}#{new_resource.name}/log/run" do
+      template ::File.join(new_resource.services_directory, new_resource.name, 'log', 'run') do
         source new_resource.log_template
         user new_resource.user
         group new_resource.group
