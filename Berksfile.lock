@@ -32,7 +32,7 @@ GRAPH
   poise-ruby-init (0.1.6)
     poise (>= 0.0.0)
     poise-ruby-build (>= 0.0.0)
-  poise-runit (0.0.32)
+  poise-runit (0.0.33)
     build-essential (>= 0.0.0)
     poise (>= 0.0.0)
     poise-ruby-init (>= 0.0.0)
