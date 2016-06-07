@@ -2,7 +2,7 @@ namespace :publishing do
   cookbook_path = ENV['RAKE_COOKBOOK_PATH']
   cookbook_name = ::File.read('NAME').strip
   task :git_update do
-    branch = ::File.read('.git/HEAD').strip
+    branch = system 'git rev-parse --abbrev-ref HEAD'
     system <<-EOH
     git add *
     git commit -a -m "updated blindly from rake"
