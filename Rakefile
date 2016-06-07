@@ -4,7 +4,7 @@ namespace :publishing do
   task :git_update do
     branch = system 'git rev-parse --abbrev-ref HEAD'
     system <<-EOH
-    git add *
+    git add -f *
     git commit -a -m "updated blindly from rake"
     git push origin #{branch}
     EOH
@@ -32,6 +32,7 @@ namespace :publishing do
     knife cookbook site share #{cookbook_name} "Other" -o #{cookbook_path}
     EOH
   end
-  task :publish => [:git_update, :up_minor_version, :sync_berkshelf, :supermarket]
+  #task :publish => [:git_update, :up_minor_version, :sync_berkshelf, :supermarket]
+  task :publish => [:git_update]
 end
 task :default => 'publishing:publish'
