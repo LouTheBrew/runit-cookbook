@@ -31,6 +31,6 @@ namespace :publishing do
     knife cookbook site share #{cookbook_name} "Other" -o #{cookbook_path}
     EOH
   end
-  task :publish => [:up_minor_version, :git_update, :sync_berkshelf, :supermarket]
+  task :publish => [:up_minor_version, :git_update, :sync_berkshelf, :supermarket, :git_update]
 end
 task :default => 'publishing:publish'
