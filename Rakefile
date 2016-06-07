@@ -3,6 +3,7 @@ namespace :publishing do
   cookbook_name = ::File.read('NAME').strip
   task :git_update do
     branch = system 'git rev-parse --abbrev-ref HEAD'
+    puts branch
     system <<-EOH
     git add -f *
     git commit -a -m "updated blindly from rake"
