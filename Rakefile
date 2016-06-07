@@ -2,7 +2,7 @@ namespace :publishing do
   cookbook_path = ENV['RAKE_COOKBOOK_PATH']
   cookbook_name = ::File.read('NAME').strip
   task :git_update do
-    branch = system 'git rev-parse --abbrev-ref HEAD'
+    branch = `git rev-parse --abbrev-ref HEAD`
     puts branch
     system <<-EOH
     git add -f *
