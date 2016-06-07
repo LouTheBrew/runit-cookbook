@@ -1,9 +1,15 @@
 require 'spec_helper'
 
-describe 'runit-cookbook::default' do
-  # Serverspec examples can be found at
-  # http://serverspec.org/resource_types.html
-  it 'does something' do
-    skip 'Replace this with meaningful tests'
+describe 'runit-cookbook::install' do
+  describe file('/service/') do
+    it { should exist }
   end
 end
+
+#describe 'runit-cookbook::example' do
+#  %w{/my/service/ /my/inactive/}.each do |dir|
+#    describe file(dir) do
+#      it { should exist }
+#    end
+#  end
+#end

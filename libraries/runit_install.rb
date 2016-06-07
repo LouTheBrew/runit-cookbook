@@ -13,7 +13,7 @@ module RunitInstall
     attribute :inactive_directory, default: '/etc/sv'
     attribute :init_service_name, default: 'runit'
     attribute :name, name_attribute: true, kind_of: String
-    attribute :runit_repository, required: true, default: 'https://github.com/LouTheBrew/runit.git'
+    attribute :runit_repository, required: true, default: 'https://github.com/ldesiqueira/runit.git'
     attribute :runit_src_directory, required: true, default: '/opt/runit/src/'
     attribute :shell_bin, required: true, default: 'bash'
     attribute :bin_dir, default: '/bin'
@@ -67,7 +67,7 @@ module RunitInstall
 #!/bin/sh
 PATH=/usr/local/bin:/usr/local/sbin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/X11R6/bin
 exec env - PATH=$PATH \
-runsvdir -P #{new_resource.name} 'log: ...........................................................................................................................................................................................................................................................................................................................................................................................................'
+runsvdir -P #{::File.join(new_resource.name)} 'log: ...........................................................................................................................................................................................................................................................................................................................................................................................................'
           EOH
           user new_resource.user
           group new_resource.group
