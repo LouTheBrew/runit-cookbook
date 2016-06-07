@@ -13,3 +13,11 @@ suites:
     run_list:
       - recipe[poise-runit::default]
     attributes:
+  - name: apache
+    run_list:
+      - recipe[poise-runit::nginx_test]
+    attributes:
+  - name: nginx
+    run_list:
+      - recipe[poise-runit::apache_test]
+    attributes:
