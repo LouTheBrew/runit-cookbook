@@ -2,12 +2,10 @@ namespace :publishing do
   cookbook_path = ENV['RAKE_COOKBOOK_PATH']
   cookbook_name = ::File.read('NAME').strip
   task :git_update do
-    branch = `git rev-parse --abbrev-ref HEAD`
-    puts branch
     system <<-EOH
     git add -f *
-    git commit -a -m "updated blindly from rake"
-    git push origin #{branch}
+    git commit -a -m "updated blindly from rake to version #{::File.read('VERSION').strip}"
+    git push origin #{`git rev-parse --abbrev-ref HEAD`}
     EOH
   end
   task :up_minor_version do
@@ -33,7 +31,7 @@ namespace :publishing do
     knife cookbook site share #{cookbook_name} "Other" -o #{cookbook_path}
     EOH
   end
-  #task :publish => [:git_update, :up_minor_version, :sync_berkshelf, :supermarket]
-  task :publish => [:git_update]
+  task :publish => [:git_update, :up_minor_version, :sync_berkshelf, :supermarket]
+  #task :publish => [:git_update]
 end
 task :default => 'publishing:publish'
