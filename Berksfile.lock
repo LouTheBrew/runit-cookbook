@@ -2,7 +2,7 @@ DEPENDENCIES
   eldus-ruby-init
     git: git@github.com:ldesiqueira/eldus-ruby-init.git
     revision: de5cb925ba4f0fed09b402ffc0319067fc52efd0
-  poise-runit
+  eldus-runit
 
     path: .
     metadata: true
@@ -17,6 +17,11 @@ GRAPH
   eldus-ruby-init (0.1.11)
     poise (>= 0.0.0)
     poise-ruby-build (>= 0.0.0)
+  eldus-runit
+ (0.1.1)
+    build-essential (>= 0.0.0)
+    eldus-ruby-init (>= 0.0.0)
+    poise (>= 0.0.0)
   git (4.6.0)
     build-essential (>= 0.0.0)
     dmg (>= 0.0.0)
@@ -36,11 +41,6 @@ GRAPH
     git (~> 4.2)
     poise (~> 2.0)
     poise-ruby (~> 2.1)
-  poise-runit
- (0.0.34)
-    build-essential (>= 0.0.0)
-    eldus-ruby-init (>= 0.0.0)
-    poise (>= 0.0.0)
   windows (1.44.1)
     chef_handler (>= 0.0.0)
   yum (3.11.0)
