@@ -3,7 +3,7 @@ A cookbook to control runit
 
 attributes/default.rb
 ======================
-- default[:poise_runit][:service][:directory]
+- default[:eldus_runit][:service][:directory]
 - directory var exists to specify directory where services should exist
 
 runit_install
@@ -18,7 +18,7 @@ end
 ```
 - This is the most basic example
 ```
-runit_install node[:poise_runit][:service][:directory]
+runit_install node[:eldus_runit][:service][:directory]
 ```
 
 runit_service

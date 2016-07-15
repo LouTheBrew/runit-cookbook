@@ -17,7 +17,7 @@ module RunitService
     attribute :group, default: 'root'
     attribute :shell, default: '/bin/sh'
     attribute :mode, default: 0777
-    attribute :local_cookbook, default: 'poise-runit'
+    attribute :local_cookbook, default: 'eldus-runit'
   end
   class Provider < Chef::Provider
     include Poise

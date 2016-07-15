@@ -1,1 +1,1 @@
-nife cookbook site share poise-runit "Other" -o ~/.work/github.com/ldesiqueira/
+nife cookbook site share eldus-runit "Other" -o ~/.work/github.com/ldesiqueira/
