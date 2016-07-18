@@ -1,4 +1,4 @@
-name ::File.read(::File.join(::File.dirname(::File.join(__FILE__)), 'NAME'))
+name ::File.read(::File.join(::File.dirname(::File.join(__FILE__)), 'NAME')).strip
 maintainer 'Luis De Siqueira'
 maintainer_email 'LouTheBrew@gmail.com'
 license 'MIT'
