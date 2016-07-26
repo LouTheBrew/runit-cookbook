@@ -10,7 +10,6 @@ module RunitInstall
     attribute :user, default: 'root'
     attribute :group, default: 'root'
     attribute :essentials_cookbook, default: 'build-essential'
-    attribute :inactive_directory, default: '/etc/sv'
     attribute :init_service_name, default: 'runit'
     attribute :name, name_attribute: true, kind_of: String
     attribute :runit_repository, required: true, default: 'https://github.com/ldesiqueira/runit.git'
@@ -33,11 +32,6 @@ module RunitInstall
       end
     end
     def common
-      directory new_resource.inactive_directory do
-        recursive true
-        user new_resource.user
-        group new_resource.group
-      end
       directory new_resource.runit_src_directory do
         recursive true
         user new_resource.user

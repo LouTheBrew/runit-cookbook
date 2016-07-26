@@ -1,9 +1,8 @@
 DEPENDENCIES
   eldus-ruby-init
     git: git@github.com:ldesiqueira/eldus-ruby-init.git
-    revision: de5cb925ba4f0fed09b402ffc0319067fc52efd0
+    revision: 14b5b23a436b42f2ac3b83f7d6a5d762a42aee22
   eldus-runit
-
     path: .
     metadata: true
 
@@ -14,11 +13,10 @@ GRAPH
     7-zip (>= 0.0.0)
   chef_handler (1.4.0)
   dmg (2.4.0)
-  eldus-ruby-init (0.1.11)
+  eldus-ruby-init (0.1.12)
     poise (>= 0.0.0)
     poise-ruby-build (>= 0.0.0)
-  eldus-runit
- (0.1.1)
+  eldus-runit (0.1.1)
     build-essential (>= 0.0.0)
     eldus-ruby-init (>= 0.0.0)
     poise (>= 0.0.0)

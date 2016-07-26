@@ -11,7 +11,6 @@ module RunitService
     attribute :service_template, default: 'service.erb'
     attribute :log_template, default: 'log_service.erb'
     attribute :services_directory, default: '/etc/sv/'
-    attribute :activated_directory, default: '/service/'
     attribute :command, default: '/tmp/dummy.sh'
     attribute :user, default: 'root'
     attribute :group, default: 'root'
@@ -26,23 +25,10 @@ module RunitService
       ::File.join(new_resource.services_directory, new_resource.name, 'log')
     end
     def common
-      [new_resource.services_directory, new_resource.activated_directory].each do |dir|
+      [new_resource.services_directory].each do |dir|
         directory dir do
           recursive true
         end
-      end
-    end
-    def action_activate
-      common
-      link ::File.join(new_resource.activated_directory, new_resource.name) do
-        to ::File.join(new_resource.services_directory, new_resource.name)
-      end
-    end
-    def action_deactivate
-      common
-      link ::File.join(new_resource.activated_directory, new_resource.name) do
-        to ::File.join(new_resource.services_directory, new_resource.name)
-        action :delete
       end
     end
     def action_install
@@ -79,7 +65,6 @@ module RunitService
         mode new_resource.mode
         cookbook new_resource.local_cookbook
       end
-      self.action_activate
     end
   end
 end

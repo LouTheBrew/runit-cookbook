@@ -17,6 +17,7 @@ driver:
     Cookbook_Version: 0.1.34
     Developer: ldesiqueira
 
+
 provisioner:
   name: <%= ENV['KITCHEN_PROVISIONER'] %>
 
