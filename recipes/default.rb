@@ -8,3 +8,6 @@ end
 runit_service 'test' do
   command 'bash /tmp/dummy.sh'
 end
+service 'test' do
+  action :start
+end

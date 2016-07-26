@@ -10,7 +10,7 @@ module RunitService
     attribute :name, name_attribute: true, kind_of: String
     attribute :service_template, default: 'service.erb'
     attribute :log_template, default: 'log_service.erb'
-    attribute :services_directory, default: '/etc/sv/'
+    attribute :services_directory, default: '/service/'
     attribute :command, default: '/tmp/dummy.sh'
     attribute :user, default: 'root'
     attribute :group, default: 'root'
